@@ -1,0 +1,70 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 8.186676136363637,
+        "y": 6.178863636363635
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 7.857462586321255,
+        "y": 6.178863636363635
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.918876262626263,
+        "y": 6.322095959595959
+      },
+      "prevControl": {
+        "x": 6.167941258367096,
+        "y": 6.300494387972138
+      },
+      "nextControl": {
+        "x": 5.66981126688543,
+        "y": 6.343697531219781
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.75625,
+        "y": 6.322095959595959
+      },
+      "prevControl": {
+        "x": 6.00531014704892,
+        "y": 6.300438555504749
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 150.0,
+    "maxAngularAcceleration": 360.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": -110.4666674756822
+  },
+  "reversed": false,
+  "folder": "CR-2P",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": false
+}
