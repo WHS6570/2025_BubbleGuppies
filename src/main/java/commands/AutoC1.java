@@ -22,7 +22,7 @@ public class AutoC1 extends Command {
 
   @Override
   public void initialize() {
-    m_armSubsystem.flex(ArmConstants.kReef1[0], ArmConstants.kReef1[1], "C1", true);
+    m_armSubsystem.flex(ArmConstants.kReef1[0], ArmConstants.kReef1[1], "C1", true, true);
     }
 
   @Override

@@ -35,16 +35,16 @@ public class CoralCycle extends Command {
       }
       switch(coralpos) {
         case 0:
-          m_armSubsystem.flex(ArmConstants.kStow[0], ArmConstants.kStow[1], "ST", false);
+          m_armSubsystem.flex(ArmConstants.kStow[0], ArmConstants.kStow[1], "ST", false, true);
           break;
         case 1:
-        m_armSubsystem.flex(ArmConstants.kReef1[0], ArmConstants.kReef1[1], "C1", false); 
+        m_armSubsystem.flex(ArmConstants.kReef1[0], ArmConstants.kReef1[1], "C1", false, true); 
           break;
         case 2:
-        m_armSubsystem.flex(ArmConstants.kReef2[0], ArmConstants.kReef2[1], "C2", false);
+        m_armSubsystem.flex(ArmConstants.kReef2[0], ArmConstants.kReef2[1], "C2", false, true);
           break;
         case 3:
-        m_armSubsystem.flex(ArmConstants.kReef3[0], ArmConstants.kReef3[1], "C3", false);
+        m_armSubsystem.flex(ArmConstants.kReef3[0], ArmConstants.kReef3[1], "C3", false, true);
           break;
         //case 4:
         //  flex(ArmConstants.kReef4[0], ArmConstants.kReef4[1]);

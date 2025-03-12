@@ -157,21 +157,21 @@ public class RobotContainer {
         //Stow arm
     new JoystickButton(m_shooterController, Button.kA.value)
         .whileTrue(new RunCommand(
-            () -> m_robotArm.flex(ArmConstants.kStow[0], ArmConstants.kStow[1], "ST", true)
+            () -> m_robotArm.flex(ArmConstants.kStow[0], ArmConstants.kStow[1], "ST", true, true)
         ));
 
 
         //Algae processor
     new JoystickButton(m_shooterController, Button.kX.value)
         .whileTrue(new RunCommand(
-            () -> m_robotArm.flex(ArmConstants.kProcesser[0], ArmConstants.kProcesser[1], "AP", true)
+            () -> m_robotArm.flex(ArmConstants.kProcesser[0], ArmConstants.kProcesser[1], "AP", true, true)
         ));
 
 
         //Intake from source
     new JoystickButton(m_shooterController, Button.kY.value)
         .whileTrue(new RunCommand(
-            () -> m_robotArm.flex(ArmConstants.kSource[0], ArmConstants.kSource[1], "CS", true)
+            () -> m_robotArm.flex(ArmConstants.kSource[0], ArmConstants.kSource[1], "CS", true, true)
         ));
 
     new JoystickButton(m_shooterController, Button.kBack.value)
@@ -232,7 +232,7 @@ new JoystickButton(m_driverController, Button.kB.value)
     ));
     new JoystickButton(m_shooterController, Button.kStart.value)
     .whileTrue(new RunCommand(
-    () -> m_robotArm.flex(8, 161, "rest", true)
+    () -> m_robotArm.flex(8, 161, "rest", true, true)
 ));
     new POVButton(m_driverController, 270)
         .whileTrue(new RunCommand(

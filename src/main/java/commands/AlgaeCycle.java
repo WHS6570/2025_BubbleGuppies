@@ -26,10 +26,10 @@ public class AlgaeCycle extends Command {
     algaepos = (algaepos >= 3) ? 1 : algaepos;
     switch(algaepos) {
       case 1:
-        m_armSubsystem.flex(ArmConstants.kAlgae1[0], ArmConstants.kAlgae1[1], "A1", true);
+        m_armSubsystem.flex(ArmConstants.kAlgae1[0], ArmConstants.kAlgae1[1], "A1", true, false);
         break;
       case 2:
-        m_armSubsystem.flex(ArmConstants.kAlgae2[0], ArmConstants.kAlgae2[1], "A2", true);
+        m_armSubsystem.flex(ArmConstants.kAlgae2[0], ArmConstants.kAlgae2[1], "A2", true, false);
         break;
     }
       SmartDashboard.putNumber("algae_cycle", algaepos);  

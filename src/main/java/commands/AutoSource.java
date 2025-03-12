@@ -22,7 +22,7 @@ public class AutoSource extends Command {
 
   @Override
   public void initialize() {
-    m_armSubsystem.flex(ArmConstants.kSource[0], ArmConstants.kSource[1], "CS", true);
+    m_armSubsystem.flex(ArmConstants.kSource[0], ArmConstants.kSource[1], "CS", true, true);
     }
 
   @Override

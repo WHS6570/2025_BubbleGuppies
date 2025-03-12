@@ -22,7 +22,7 @@ public class AutoStow extends Command {
 
   @Override
   public void initialize() {
-    m_armSubsystem.flex(ArmConstants.kStow[0], ArmConstants.kStow[1], "ST", true);
+    m_armSubsystem.flex(ArmConstants.kStow[0], ArmConstants.kStow[1], "ST", true, true);
     }
 
   @Override

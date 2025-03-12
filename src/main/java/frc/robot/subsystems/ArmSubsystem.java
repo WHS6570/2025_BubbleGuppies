@@ -135,7 +135,7 @@ wristmotor.configure(wristconfig, ResetMode.kResetSafeParameters, PersistMode.kN
     // Query some boolean state, such as a digital sensor.
     return false;
   }
-  public void flex(double shoulderangle, double wristangle, String targ, boolean resetcoral) {
+  public void flex(double shoulderangle, double wristangle, String targ, boolean resetcoral, boolean resetalgae) {
    // shoulderpid.setReference(shoulderangle,ControlType.kPosition);
    //wristpid.setReference(wristangle,ControlType.kPosition);
    armgoal = shoulderangle;
@@ -143,6 +143,9 @@ wristmotor.configure(wristconfig, ResetMode.kResetSafeParameters, PersistMode.kN
    goal = targ;
    if (resetcoral) {
     coralpos = 0;
+   }
+   if (resetalgae) {
+    algaepos = 0;
    }
 
   }
@@ -271,7 +274,7 @@ wristmotor.configure(wristconfig, ResetMode.kResetSafeParameters, PersistMode.kN
     if (goal=="rest") {
       shouldermotor.setVoltage(0);
     } else {
-      if (wristmotor.getAbsoluteEncoder().getPosition() > 40 && armgoal <30) {
+      if (wristmotor.getAbsoluteEncoder().getPosition() > 40 && armgoal < 25) {
        shoulderpid.setReference(30,ControlType.kPosition);
       } else {
         shoulderpid.setReference(armgoal + atrim, ControlType.kPosition);
