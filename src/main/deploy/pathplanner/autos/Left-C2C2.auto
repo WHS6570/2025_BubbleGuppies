@@ -1,0 +1,179 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoC2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Start-G1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoLeft"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoDrive"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetLights"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoStow"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoSource"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Goal1-CS"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoDrive"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoGrab"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetLights"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoStow"
+                      }
+                    },
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoC2"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "CoralS-G2"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoC2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoRight"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoDrive"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetLights"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoStow"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Comp Left",
+  "choreoAuto": false
+}

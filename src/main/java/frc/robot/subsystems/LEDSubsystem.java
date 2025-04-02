@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkLowLevel.MotorType;
-import com.revrobotics.Rev2mDistanceSensor;
 import com.revrobotics.spark.SparkMax;
 
 import edu.wpi.first.networktables.NetworkTable;
@@ -53,7 +52,7 @@ public class LEDSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
     if (target == 1) {
         disco(0.77); //0.77 = green
-    } else if (intake.distOnboard.getRange() < 5){ //May need to change number.
+    } else if (intake.distOnboard.getDistance().getValueAsDouble() < 5){ //May need to change number.
         disco(0.81); //0.81 = aqua
     } else {
         disco(0.41); //0.41 = blue & gold?

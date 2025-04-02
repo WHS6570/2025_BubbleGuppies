@@ -29,10 +29,15 @@ public class AutoGrab extends Command {
 
   @Override
   public boolean isFinished() {
-    if (m_intakeSubsystem.getdistance() <= 5 && m_intakeSubsystem.getdistance() != -1) {
+    if (m_intakeSubsystem.getdistance() <= 0.2 && m_intakeSubsystem.getdistance() != -1) {
         return true;
     } else {
         return false;
     }
+  }
+
+  @Override
+  public void end(boolean interrupted) {
+    m_intakeSubsystem.spinny(0);
   }
 }

@@ -14,6 +14,7 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
+import edu.wpi.first.math.kinematics.Odometry;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
@@ -24,6 +25,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.AutoConstants;
 import frc.robot.Constants.DriveConstants;
 
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -69,7 +71,7 @@ static Spark blinkin = new Spark(0);
   // Odometry class for tracking robot pose
   SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(
       DriveConstants.kDriveKinematics,
-      Rotation2d.fromDegrees(-m_gyro.getAngle()),
+      Rotation2d.fromDegrees(getHeading()),
       new SwerveModulePosition[] {
           m_frontLeft.getPosition(),
           m_frontRight.getPosition(),
@@ -88,11 +90,13 @@ static Spark blinkin = new Spark(0);
       AutoBuilder.configure(
             this::getPose, // Robot pose supplier
             this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
-            this::getSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
-            (speeds, feedforwards) -> driveRobotRelative(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
+            //this::getSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+            this::getRobotRelativeSpeeds, // ChassisSpeeds supplier. MUST BE ROBOT RELATIVE
+
+            (speeds) -> driveRobotRelative2(speeds), // Method that will drive the robot given ROBOT RELATIVE ChassisSpeeds. Also optionally outputs individual module feedforwards
             new PPHolonomicDriveController( // PPHolonomicController is the built in path following controller for holonomic drive trains
                     new PIDConstants(0.75, 0.0, 0.15), // Translation PID constants
-                    new PIDConstants(0.2, 0.0, 0.0) // Rotation PID constants
+                    new PIDConstants(0.75, 0.0, 0.0) // Rotation PID constants
             ),
             config, // The robot configuration
             () -> {
@@ -121,7 +125,7 @@ static Spark blinkin = new Spark(0);
   public void periodic() {
     // Update the odometry in the periodic block
     m_odometry.update(
-        Rotation2d.fromDegrees(-m_gyro.getAngle()),
+        Rotation2d.fromDegrees(getHeading()),
         new SwerveModulePosition[] {
             m_frontLeft.getPosition(),
             m_frontRight.getPosition(),
@@ -130,7 +134,7 @@ static Spark blinkin = new Spark(0);
         });
         double llacquired = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
         double lllacquired = NetworkTableInstance.getDefault().getTable("limelight-lesser").getEntry("tv").getDouble(0);
-        SmartDashboard.putNumber("heading",-m_gyro.getAngle());
+        SmartDashboard.putNumber("heading",getHeading());
         SmartDashboard.putNumber("ytrim", ytrim);
         SmartDashboard.putNumber("color",color);
         SmartDashboard.putNumber("Acquired?", llacquired);
@@ -151,6 +155,8 @@ static Spark blinkin = new Spark(0);
    * @return The pose.
    */
   public Pose2d getPose() {
+    // Pose2d temppose = new Pose2d(-m_odometry.getPoseMeters().getX(), -m_odometry.getPoseMeters().getY(), m_odometry.getPoseMeters().getRotation());
+    // return temppose;
     return m_odometry.getPoseMeters();
   }
 
@@ -161,7 +167,7 @@ static Spark blinkin = new Spark(0);
    */
   public void resetOdometry(Pose2d pose) {
     m_odometry.resetPosition(
-        Rotation2d.fromDegrees(-m_gyro.getAngle()),
+        Rotation2d.fromDegrees(getHeading()),
         new SwerveModulePosition[] {
             m_frontLeft.getPosition(),
             m_frontRight.getPosition(),
@@ -171,8 +177,8 @@ static Spark blinkin = new Spark(0);
         pose);
   }
   public void autodrive(double xSpeed, double ySpeed, double rot) {
-    double xSpeedDelivered = xSpeed;
-    double ySpeedDelivered = ySpeed;
+    double xSpeedDelivered = -xSpeed;
+    double ySpeedDelivered = -ySpeed;
     double rotDelivered = rot;
     var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
           new ChassisSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered));
@@ -243,9 +249,9 @@ SmartDashboard.putNumber("rangeval", range);
 
     var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(
         fieldRelative
-            ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered,
-                Rotation2d.fromDegrees(-m_gyro.getAngle()))
-            : new ChassisSpeeds(xSpeedDelivered, ySpeedDelivered, rotDelivered));
+            ? ChassisSpeeds.fromFieldRelativeSpeeds(-xSpeedDelivered, -ySpeedDelivered, rotDelivered,
+                Rotation2d.fromDegrees(getHeading()))
+            : new ChassisSpeeds(-xSpeedDelivered, -ySpeedDelivered, rotDelivered));
     SwerveDriveKinematics.desaturateWheelSpeeds(
         swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
@@ -334,18 +340,41 @@ SmartDashboard.putNumber("rangeval", range);
     return states;
   }
   public void driveRobotRelative(ChassisSpeeds speeds) {
-    ChassisSpeeds targetSpeeds = ChassisSpeeds.fromRobotRelativeSpeeds(-speeds.vxMetersPerSecond, -speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, Rotation2d.fromDegrees((-m_gyro.getAngle())));
+    //ChassisSpeeds targetSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(speeds.vxMetersPerSecond, speeds.vyMetersPerSecond, speeds.omegaRadiansPerSecond, Rotation2d.fromDegrees((-m_gyro.getAngle())));
     //ChassisSpeeds targetSpeeds = speeds.unaryMinus();
     //-->targetSpeeds = ChassisSpeeds.discretize(ChassisSpeeds.fromRobotRelativeSpeeds(targetSpeeds, Rotation2d.fromDegrees(-m_gyro.getAngle())), 0.2);
-    //ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(ChassisSpeeds.fromRobotRelativeSpeeds(speeds, Rotation2d.fromDegrees(-m_gyro.getAngle())), 0.2);
+    
+    //Welling - So, this was a suggestion to double desaturate wheel speeds. The next 4 lines are new...
+    //var tmpStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(speeds);
+    //SwerveDriveKinematics.desaturateWheelSpeeds(tmpStates, AutoConstants.kMaxSpeedMetersPerSecond);
+    // convert back to chassis speeds
+    //speeds = DriveConstants.kDriveKinematics.toChassisSpeeds(tmpStates);
+    //Welling - Here is where we cut if this doesn't work.
+    ChassisSpeeds targetSpeeds = ChassisSpeeds.discretize(ChassisSpeeds.fromFieldRelativeSpeeds(speeds, Rotation2d.fromDegrees(-getHeading())), 0.2);
     SwerveModuleState[] swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(targetSpeeds);
     SwerveDriveKinematics.desaturateWheelSpeeds(
-        swerveModuleStates, DriveConstants.kMaxSpeedMetersPerSecond);
+        swerveModuleStates, AutoConstants.kMaxSpeedMetersPerSecond);
     m_frontLeft.setDesiredState(swerveModuleStates[0]);
     m_frontRight.setDesiredState(swerveModuleStates[1]);
     m_rearLeft.setDesiredState(swerveModuleStates[2]);
     m_rearRight.setDesiredState(swerveModuleStates[3]);
   }
- 
 
+  public void driveRobotRelative2(ChassisSpeeds chassisSpeeds) {
+    var swerveModuleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
+    setModuleStates(swerveModuleStates);
+  }
+
+  private ChassisSpeeds getRobotRelativeSpeeds() {
+    return DriveConstants.kDriveKinematics.toChassisSpeeds(getModuleStates());
+  }
+ 
+  public void overridefb() {
+    PPHolonomicDriveController.overrideXFeedback(() -> { return 0.0;});
+    PPHolonomicDriveController.overrideYFeedback(() -> { return 0.0;});
+  }
+
+  public void clearoverride() {
+    PPHolonomicDriveController.clearFeedbackOverrides();
+  }
 }

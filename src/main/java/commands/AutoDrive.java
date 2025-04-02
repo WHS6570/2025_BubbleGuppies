@@ -28,9 +28,9 @@ public class AutoDrive extends Command {
   private String goal;
   private double yoffset;
   private double zdist;
-  PIDController rotpid = new PIDController(0.2, 0, 0);
-  PIDController drivepid = new PIDController(0.5, 0, 0.1);
-  PIDController strafepid = new PIDController(0.5, 0, 0.1);
+  PIDController rotpid = new PIDController(0.4, 0, 0);
+  PIDController drivepid = new PIDController(0.8, 0, 0.1);
+  PIDController strafepid = new PIDController(0.8, 0, 0.1);
   private String limelight = "limelight";
   public boolean rotlinedup = false;
   public boolean ylinedup = false;
@@ -58,13 +58,13 @@ public class AutoDrive extends Command {
     goal = m_armSubsystem.goalcheck();
     if (goal=="CS" || goal=="AP") {
       limelight = "limelight";
-      yoffset = 0.27;
+      yoffset = 0.24;
     } else if (goal=="C1" || goal=="C2" || goal=="C3") {
       limelight = "limelight-lesser";
       if (m_armSubsystem.offsetcheck()) {
-        yoffset = 0.27;
+        yoffset = 0.24;
       } else {
-      yoffset = -0.06;
+      yoffset = -0.09;
       }
     } else if (goal=="A1" || goal=="A2") {
       limelight = "limelight-lesser";
@@ -90,9 +90,9 @@ public class AutoDrive extends Command {
           zlinedup = false;
         }
                 
-        if (rx <= -4 || rx >= 0) {
+        if (rx <= -6 || rx >= -2) {
           rotDelivered = -rotpid.calculate(rx, -4);
-          rotDelivered = MathUtil.clamp(rotDelivered, -0.4, 0.4);
+          rotDelivered = MathUtil.clamp(rotDelivered, -0.45, 0.45);
           rotlinedup = false;
         } else {
           rotDelivered = 0;
@@ -138,6 +138,7 @@ public class AutoDrive extends Command {
   @Override
   public void end(boolean interrupted) {
     m_driveSubsystem.setcolor(2);
+    m_driveSubsystem.autodrive(0, 0, 0);
   }
   @Override
   public boolean isFinished() {

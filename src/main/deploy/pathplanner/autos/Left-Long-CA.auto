@@ -1,0 +1,112 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoC2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Start-G1L"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoRight"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoDrive"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetLights"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoBackup"
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "sequential",
+                "data": {
+                  "commands": [
+                    {
+                      "type": "wait",
+                      "data": {
+                        "waitTime": 1.0
+                      }
+                    },
+                    {
+                      "type": "named",
+                      "data": {
+                        "name": "AutoA2"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoDrive"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoGrabAlgae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoBackup"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoStowAlgae"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Comp Left",
+  "choreoAuto": false
+}

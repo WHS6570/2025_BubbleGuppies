@@ -47,15 +47,15 @@ public final class Constants {
     public static final double kBackRightChassisAngularOffset = Math.PI / 2;
 
     // SPARK MAX CAN IDs
-    public static final int kFrontLeftDrivingCanId = 12;
-    public static final int kRearLeftDrivingCanId = 11;
-    public static final int kFrontRightDrivingCanId = 13;
-    public static final int kRearRightDrivingCanId = 14;
+    public static final int kFrontLeftDrivingCanId = 14;
+    public static final int kRearLeftDrivingCanId = 13;
+    public static final int kFrontRightDrivingCanId = 11;
+    public static final int kRearRightDrivingCanId = 12;
     // the order top to bottom 14,13,11,12, 24,23,21,22
-    public static final int kFrontLeftTurningCanId = 22;
-    public static final int kRearLeftTurningCanId = 21;
-    public static final int kFrontRightTurningCanId = 23;
-    public static final int kRearRightTurningCanId = 24;
+    public static final int kFrontLeftTurningCanId = 24;
+    public static final int kRearLeftTurningCanId = 23;
+    public static final int kFrontRightTurningCanId = 21;
+    public static final int kRearRightTurningCanId = 22;
 
     public static final boolean kGyroReversed = true;
   }
@@ -84,7 +84,7 @@ public final class Constants {
   }
 
   public static final class AutoConstants {
-    public static final double kMaxSpeedMetersPerSecond = 3;
+    public static final double kMaxSpeedMetersPerSecond = 6;
     public static final double kMaxAccelerationMetersPerSecondSquared = 3;
     public static final double kMaxAngularSpeedRadiansPerSecond = Math.PI;
     public static final double kMaxAngularSpeedRadiansPerSecondSquared = Math.PI;
@@ -110,10 +110,11 @@ public final class Constants {
     public static final double[] kSource = {60, 60};
     public static final double[] kProcesser = {45, 200};
     public static final double[] kReef1 = {44, 20};
-    public static final double[] kReef2 = {58.5, 21};
+    //Kreef 2 was 58.5,21
+    public static final double[] kReef2 = {57, 21};
     public static final double[] kReef3 = {74, 195};
     public static final double[] kReef4 = {140, 145};
-    public static final double[] kAlgae1 = {62, 183};
+    public static final double[] kAlgae1 = {65, 183};
     public static final double[] kAlgae2 = {86, 161};
   }
 }

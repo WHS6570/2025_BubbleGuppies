@@ -22,6 +22,7 @@ public class AlgaeCycle extends Command {
 
   @Override
   public void initialize() {
+    algaepos = m_armSubsystem.getalgaepos();
     algaepos++;
     algaepos = (algaepos >= 3) ? 1 : algaepos;
     switch(algaepos) {
@@ -33,6 +34,7 @@ public class AlgaeCycle extends Command {
         break;
     }
       SmartDashboard.putNumber("algae_cycle", algaepos);  
+      m_armSubsystem.setalgaepos(algaepos);
     }
 
 

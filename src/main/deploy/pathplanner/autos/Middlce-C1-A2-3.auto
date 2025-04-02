@@ -1,0 +1,196 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoC1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Start-Trough"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoBackup"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoA1"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoGrabAlgae"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoDrive"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoBackup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Rotatoe"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShootAlgae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoStow"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Algae-Algae2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoBackup"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoA2"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoGrabAlgae"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoDrive"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoBackup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Rotatoe2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShootAlgae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoStow"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Algae2-Algae3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoA2"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoDrive"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoGrabAlgae"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Comp Middle",
+  "choreoAuto": false
+}

@@ -222,28 +222,36 @@ wristmotor.configure(wristconfig, ResetMode.kResetSafeParameters, PersistMode.kN
     coralpos = change;
   }
 
+  public int getalgaepos() {
+    return algaepos;
+  }
+
+  public void setalgaepos(int change) {
+    algaepos = change;
+  }
+
   public double goaldistance() {
     switch (goal) {
       case "CS":
-        return -0.96;
+        return -0.98;
         
       case "C1":
         return -1;
         
       case "C2":
-        return -0.85;
+        return -0.87;
         
       case "C3":
-        return -0.9;
+        return -0.96;
         
       case "C4":
         return -1.05;
         
       case "A1":
-        return -1.0;
+        return -0.90;
         
       case "A2":
-        return -1.00;
+        return -0.90;
         
       case "AP":
         return -1.00;
@@ -265,7 +273,10 @@ wristmotor.configure(wristconfig, ResetMode.kResetSafeParameters, PersistMode.kN
    // shoulderpid.setReference(armgoal,ControlType.kPosition);
    if (goal=="rest") {
     wristpid.setReference(200,ControlType.kPosition);
-   } else {
+   } else if (goal=="apickup") {
+    wristpid.setReference(210,ControlType.kPosition);
+
+  } else {
       if (shouldermotor.getAbsoluteEncoder().getPosition() < 25) {
         wristpid.setReference(20,ControlType.kPosition);
       } else {
@@ -273,6 +284,9 @@ wristmotor.configure(wristconfig, ResetMode.kResetSafeParameters, PersistMode.kN
       }}
     if (goal=="rest") {
       shouldermotor.setVoltage(0);
+    } else if (goal=="apickup") {
+      shoulderpid.setReference(17,ControlType.kPosition);
+
     } else {
       if (wristmotor.getAbsoluteEncoder().getPosition() > 40 && armgoal < 25) {
        shoulderpid.setReference(30,ControlType.kPosition);

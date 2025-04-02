@@ -1,0 +1,74 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Start-TroughB"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoA1"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoDrive"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoGrabAlgae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoBackup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HOLD-ScoreB"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Algae2-Algae3B"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "HOLD-ScoreAB"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Comp Middle",
+  "choreoAuto": false
+}

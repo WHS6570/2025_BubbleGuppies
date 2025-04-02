@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.Rev2mDistanceSensor;
-import com.revrobotics.Rev2mDistanceSensor.Port;
+import com.ctre.phoenix6.hardware.CANrange;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -19,7 +18,7 @@ public class IntakeSubsystem extends SubsystemBase {
   SparkMax m_right550 = new SparkMax(44, MotorType.kBrushless);
   SparkMaxConfig leftconfig = new SparkMaxConfig();
   SparkMaxConfig rightconfig = new SparkMaxConfig();
-  public Rev2mDistanceSensor distOnboard;
+  public CANrange distOnboard;
 
   public IntakeSubsystem() {
     leftconfig.smartCurrentLimit(30)
@@ -28,8 +27,8 @@ public class IntakeSubsystem extends SubsystemBase {
     .idleMode(IdleMode.kBrake);
     m_left550.configure(leftconfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
     m_right550.configure(rightconfig, ResetMode.kResetSafeParameters, PersistMode.kNoPersistParameters);
-    distOnboard = new Rev2mDistanceSensor(Port.kMXP);
-    distOnboard.setAutomaticMode(true);
+    distOnboard = new CANrange(31);
+    //distOnboard.setAutomaticMode(true);
   }
 
   /**
@@ -59,15 +58,18 @@ public class IntakeSubsystem extends SubsystemBase {
     m_left550.set(-speed);
     m_right550.set(speed);
   }
-
+  public void trough() {
+    m_left550.set(0.0);
+    m_right550.set(0.5);
+  }
   public double getdistance() {
-    return distOnboard.getRange();
+    return distOnboard.getDistance().getValueAsDouble();
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-  SmartDashboard.putNumber("dists", distOnboard.getRange());
+  SmartDashboard.putNumber("dists", distOnboard.getDistance().getValueAsDouble());
   }
 
   @Override

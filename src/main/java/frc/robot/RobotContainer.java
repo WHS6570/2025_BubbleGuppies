@@ -10,18 +10,28 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import commands.AlgaeCycle;
+import commands.AutoA1;
+import commands.AutoA2;
+import commands.AutoBackup;
 import commands.AutoC1;
 import commands.AutoC2;
 import commands.AutoC3;
+import commands.AutoClearOverride;
 import commands.AutoCoralAdjust;
 import commands.AutoDrive;
+import commands.AutoFBOverride;
 import commands.AutoStow;
+import commands.AutoStowAlgae;
 import commands.AutoGrab;
+import commands.AutoGrabAlgae;
+import commands.AutoHoldAlgae;
 import commands.AutoLeft;
 import commands.AutoRight;
 import commands.AutoShoot;
+import commands.AutoShootAlgae;
 import commands.AutoSource;
 import commands.CoralCycle;
+import commands.ResetLights;
 import commands.SetTrim;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.math.MathUtil;
@@ -82,14 +92,24 @@ public class RobotContainer {
     NamedCommands.registerCommand("AutoDrive", new AutoDrive("approach", m_robotArm, m_robotDrive));
     NamedCommands.registerCommand("AutoGrab", new AutoGrab(m_robotIntake));
     NamedCommands.registerCommand("AutoShoot", new AutoShoot(m_robotIntake, m_robotArm));
+    NamedCommands.registerCommand("AutoShootAlgae", new AutoShootAlgae(m_robotIntake, m_robotArm));
     NamedCommands.registerCommand("AutoStow", new AutoStow(m_robotArm));
+    NamedCommands.registerCommand("AutoStowAlgae", new AutoStowAlgae(m_robotArm));
     NamedCommands.registerCommand("AutoC1", new AutoC1(m_robotArm));
     NamedCommands.registerCommand("AutoC2", new AutoC2(m_robotArm));
     NamedCommands.registerCommand("AutoC3", new AutoC3(m_robotArm));
+    NamedCommands.registerCommand("AutoA1", new AutoA1(m_robotArm));
+    NamedCommands.registerCommand("AutoA2", new AutoA2(m_robotArm));
     NamedCommands.registerCommand("AutoCoralAdjust", new AutoCoralAdjust(m_robotIntake));
     NamedCommands.registerCommand("AutoRight", new AutoRight(m_robotArm));
     NamedCommands.registerCommand("AutoLeft", new AutoLeft(m_robotArm));
     NamedCommands.registerCommand("AutoSource", new AutoSource(m_robotArm));
+    NamedCommands.registerCommand("AutoGrabAlgae", new AutoGrabAlgae(m_robotIntake));
+    NamedCommands.registerCommand("AutoHoldAlgae", new AutoHoldAlgae(m_robotIntake));
+    NamedCommands.registerCommand("AutoFBOverride", new AutoFBOverride(m_robotDrive));
+    NamedCommands.registerCommand("AutoBackup", new AutoBackup(m_robotDrive));
+    NamedCommands.registerCommand("ResetLights", new ResetLights(m_robotDrive));
+    NamedCommands.registerCommand("AutoClearOverrides", new AutoClearOverride(m_robotDrive));
     autoChooser = AutoBuilder.buildAutoChooser();
 
     // Another option that allows you to specify the default auto by its name
@@ -177,7 +197,14 @@ public class RobotContainer {
     new JoystickButton(m_shooterController, Button.kBack.value)
         .whileTrue(new AutoGrab(m_robotIntake)
         );
-
+        new JoystickButton(m_shooterController, Button.kRightStick.value)
+        .whileTrue(new RunCommand(
+            () -> m_robotArm.flex(12, 200, "apickup", true, true), m_robotArm)
+        );
+        new JoystickButton(m_shooterController, Button.kLeftStick.value)
+        .whileTrue(new RunCommand(
+            () -> m_robotIntake.trough(), m_robotArm)
+        );
 
         //Cycle through algae positions
     new JoystickButton(m_shooterController, Button.kB.value)

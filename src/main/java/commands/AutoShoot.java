@@ -41,4 +41,9 @@ double m_startTime = 0;
     double elapsedTime = currentTime - m_startTime;
     if (elapsedTime>0.5) {return true;} else {return false;}
   }
+
+  @Override
+  public void end(boolean interrupted) {
+    m_intakeSubsystem.spinny(0.0);
+  }
 }

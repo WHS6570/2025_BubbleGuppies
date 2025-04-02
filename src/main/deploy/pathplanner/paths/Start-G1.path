@@ -3,25 +3,25 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 8.186676136363637,
-        "y": 6.178863636363635
+        "x": 8.083838383838383,
+        "y": 6.189962121212122
       },
       "prevControl": null,
       "nextControl": {
-        "x": 7.857462586321255,
-        "y": 6.178863636363635
+        "x": 7.591083398815976,
+        "y": 6.217151986326497
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 5.918876262626263,
-        "y": 6.647528409090909
+        "x": 5.693778409090909,
+        "y": 5.760056818181818
       },
       "prevControl": {
-        "x": 6.167936409675184,
-        "y": 6.6258710049996985
+        "x": 5.930625497028366,
+        "y": 5.840078421112192
       },
       "nextControl": null,
       "isLocked": false,
@@ -35,20 +35,20 @@
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
-    "maxAngularVelocity": 150.0,
-    "maxAngularAcceleration": 360.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -110.4666674756822
+    "rotation": 55.0
   },
   "reversed": false,
-  "folder": "CR-2P",
+  "folder": "Left-C2C2",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 180.0
   },
-  "useDefaultConstraints": false
+  "useDefaultConstraints": true
 }
