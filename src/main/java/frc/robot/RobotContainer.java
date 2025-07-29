@@ -175,24 +175,24 @@ public class RobotContainer {
 
 
         //Stow arm
-    new JoystickButton(m_shooterController, Button.kA.value)
-        .whileTrue(new RunCommand(
-            () -> m_robotArm.flex(ArmConstants.kStow[0], ArmConstants.kStow[1], "ST", true, true)
-        ));
+    // new JoystickButton(m_shooterController, Button.kA.value)
+    //     .whileTrue(new RunCommand(
+    //         () -> m_robotArm.flex(ArmConstants.kStow[0], ArmConstants.kStow[1], "ST", true, true)
+    //     ));
 
 
-        //Algae processor
-    new JoystickButton(m_shooterController, Button.kX.value)
-        .whileTrue(new RunCommand(
-            () -> m_robotArm.flex(ArmConstants.kProcesser[0], ArmConstants.kProcesser[1], "AP", true, true)
-        ));
+    //     //Algae processor
+    // new JoystickButton(m_shooterController, Button.kX.value)
+    //     .whileTrue(new RunCommand(
+    //         () -> m_robotArm.flex(ArmConstants.kProcesser[0], ArmConstants.kProcesser[1], "AP", true, true)
+    //     ));
 
 
-        //Intake from source
-    new JoystickButton(m_shooterController, Button.kY.value)
-        .whileTrue(new RunCommand(
-            () -> m_robotArm.flex(ArmConstants.kSource[0], ArmConstants.kSource[1], "CS", true, true)
-        ));
+    //     //Intake from source
+    // new JoystickButton(m_shooterController, Button.kY.value)
+    //     .whileTrue(new RunCommand(
+    //         () -> m_robotArm.flex(ArmConstants.kSource[0], ArmConstants.kSource[1], "CS", true, true)
+    //     ));
 
     new JoystickButton(m_shooterController, Button.kBack.value)
         .whileTrue(new AutoGrab(m_robotIntake)
@@ -206,28 +206,28 @@ public class RobotContainer {
             () -> m_robotIntake.trough(), m_robotArm)
         );
 
-        //Cycle through algae positions
-    new JoystickButton(m_shooterController, Button.kB.value)
-        .whileTrue(new AlgaeCycle(m_robotArm)
-        );
-//     new JoystickButton(m_shooterController, Button.kA.value)
-//     .whileTrue((m_robotArm.sysIdQuasistatic(SysIdRoutine.Direction.kReverse)));
+    //     //Cycle through algae positions
+    // new JoystickButton(m_shooterController, Button.kB.value)
+    //     .whileTrue(new AlgaeCycle(m_robotArm)
+    //     );
+    new JoystickButton(m_shooterController, Button.kA.value)
+    .whileTrue((m_robotArm.sysIdQuasistatic(SysIdRoutine.Direction.kReverse)));
 
 
-//     //Algae processor
-// new JoystickButton(m_shooterController, Button.kX.value)
-//     .whileTrue((m_robotArm.sysIdDynamic(SysIdRoutine.Direction.kReverse)));
+    //Algae processor
+new JoystickButton(m_shooterController, Button.kX.value)
+    .whileTrue((m_robotArm.sysIdDynamic(SysIdRoutine.Direction.kReverse)));
     
 
 
-//     //Intake from source
-// new JoystickButton(m_shooterController, Button.kY.value)
-//     .whileTrue((m_robotArm.sysIdDynamic(SysIdRoutine.Direction.kForward)));
+    //Intake from source
+new JoystickButton(m_shooterController, Button.kY.value)
+    .whileTrue((m_robotArm.sysIdDynamic(SysIdRoutine.Direction.kForward)));
 
 
-//     //Cycle through algae positions
-// new JoystickButton(m_shooterController, Button.kB.value)
-//     .whileTrue((m_robotArm.sysIdQuasistatic(SysIdRoutine.Direction.kForward)));
+    //Cycle through algae positions
+new JoystickButton(m_shooterController, Button.kB.value)
+    .whileTrue((m_robotArm.sysIdQuasistatic(SysIdRoutine.Direction.kForward)));
 
     //Cycle through algae positions
     new POVButton(m_shooterController, 0)

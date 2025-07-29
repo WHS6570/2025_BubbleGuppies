@@ -1,0 +1,54 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 6.102,
+        "y": 4.025
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 6.701515151515151,
+        "y": 4.462058080808081
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 5.339520202020202,
+        "y": 5.488636363636363
+      },
+      "prevControl": {
+        "x": 5.563131313131313,
+        "y": 5.620770202020202
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 55.0
+  },
+  "reversed": false,
+  "folder": "Algae-Grab-Spit",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 65.0
+  },
+  "useDefaultConstraints": true
+}

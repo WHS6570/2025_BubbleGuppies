@@ -1,0 +1,224 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoC2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "S-G1"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoRight"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoDrive"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoA1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "G1-A1"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoDrive"
+                }
+              },
+              {
+                "type": "named",
+                "data": {
+                  "name": "AutoGrabAlgae"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoBackup"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "ROTATEDAMIT"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShootAlgae"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetLights"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoSource"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "A1-CS"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoDrive"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoGrab"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoC3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CS-G2"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoLeft"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoDrive"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "ResetLights"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoSource"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "G2-CS"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoDrive"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoGrab"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoC3"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "CS-G3"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoRight"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoDrive"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoShoot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "AutoStow"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": "Algae",
+  "choreoAuto": false
+}

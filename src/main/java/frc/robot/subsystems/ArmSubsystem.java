@@ -12,9 +12,20 @@ import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.AbsoluteEncoderConfig;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import static edu.wpi.first.units.Units.Meters;
+import static edu.wpi.first.units.Units.MetersPerSecond;
+import static edu.wpi.first.units.Units.Volts;
+import static edu.wpi.first.units.Units.Degrees;
+import static edu.wpi.first.units.Units.DegreesPerSecond;
+import edu.wpi.first.units.measure.MutAngle;
+import edu.wpi.first.units.measure.MutAngularVelocity;
+import edu.wpi.first.units.measure.MutDistance;
+import edu.wpi.first.units.measure.MutVoltage;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.Constants.ArmConstants;
 
 public class ArmSubsystem extends SubsystemBase {
@@ -38,6 +49,37 @@ public class ArmSubsystem extends SubsystemBase {
   public boolean rloffset = false;
   public double atrim = 0;
 
+  private final MutVoltage m_appliedVoltage = Volts.mutable(0);
+  // Mutable holder for unit-safe linear distance values, persisted to avoid reallocation.
+  private final MutDistance m_distance = Meters.mutable(0);
+  private final MutAngle m_angle = Degrees.mutable(0);
+
+  // Mutable holder for unit-safe linear velocity values, persisted to avoid reallocation.
+  private final MutAngularVelocity m_velocity = DegreesPerSecond.mutable(0);
+  
+    SysIdRoutine routine = new SysIdRoutine(
+    new SysIdRoutine.Config(),
+    new SysIdRoutine.Mechanism(  voltage -> {
+      shouldermotor.setVoltage(voltage);
+    },  log -> {
+                // Record a frame for the left motors.  Since these share an encoder, we consider
+                // the entire group to be one motor.
+                log.motor("drive-left")
+                    .voltage(
+                        m_appliedVoltage.mut_replace(
+                            shouldermotor.getAppliedOutput() * RobotController.getBatteryVoltage(), Volts))
+                    .angularPosition(m_angle.mut_replace(shoulderencoder.getPosition(), Degrees))
+                    
+                    .angularVelocity(
+                        m_velocity.mut_replace(shoulderencoder.getVelocity(), DegreesPerSecond));
+                // Record a frame for the right motors.  Since these share an encoder, we consider
+                // the entire group to be one motor.
+                
+              },
+              // Tell SysId to make generated commands require this subsystem, suffix test state in
+              // WPILog with this subsystem's name ("drive")
+              this));
+
   public ArmSubsystem() {
     shoulderpid = shouldermotor.getClosedLoopController();
     shoulderencoder = shouldermotor.getAbsoluteEncoder();
@@ -47,7 +89,6 @@ public class ArmSubsystem extends SubsystemBase {
     wristconfig = new SparkMaxConfig();
     armcoderconfig = new AbsoluteEncoderConfig();
     wristcoderconfig = new AbsoluteEncoderConfig();
-
 
     shoulderconfig.inverted(true);
 
@@ -269,7 +310,6 @@ wristmotor.configure(wristconfig, ResetMode.kResetSafeParameters, PersistMode.kN
     SmartDashboard.putNumber("armset", armgoal);
     SmartDashboard.putNumber("wristset", wristgoal);
     SmartDashboard.putNumber("atrim", atrim);
-
    // shoulderpid.setReference(armgoal,ControlType.kPosition);
    if (goal=="rest") {
     wristpid.setReference(200,ControlType.kPosition);
@@ -293,6 +333,13 @@ wristmotor.configure(wristconfig, ResetMode.kResetSafeParameters, PersistMode.kN
       } else {
         shoulderpid.setReference(armgoal + atrim, ControlType.kPosition);
       }}
+  }
+  public Command sysIdQuasistatic(SysIdRoutine.Direction direction) {
+    return routine.quasistatic(direction);
+  }
+  
+  public Command sysIdDynamic(SysIdRoutine.Direction direction) {
+    return routine.dynamic(direction);
   }
 
   @Override
