@@ -107,14 +107,14 @@ public final class Constants {
     public static final double[] kForwardLimit = {100.00, 200};
     public static final double[] kReverseLimit = {20, 20};
     public static final double[] kStow = {4, 25};
-    public static final double[] kSource = {58, 60};
+    public static final double[] kSource = {55, 60};
     public static final double[] kProcesser = {33, 200};
     public static final double[] kReef1 = {44, 20};
     //Kreef 2 was 58.5,21
     public static final double[] kReef2 = {52, 21};
     public static final double[] kReef3 = {69, 195};
     public static final double[] kReef4 = {140, 145};
-    public static final double[] kAlgae1 = {60, 183};
+    public static final double[] kAlgae1 = {55, 183};
     public static final double[] kAlgae2 = {86, 161};
   }
 }

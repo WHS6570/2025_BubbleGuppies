@@ -62,7 +62,7 @@ public class AutoDrive extends Command {
     } else if (goal=="C1" || goal=="C2" || goal=="C3") {
       limelight = "limelight-lesser";
       if (m_armSubsystem.offsetcheck()) {
-        yoffset = 0.27;
+        yoffset = 0.30;
       } else {
       yoffset = -0.04;
       }

@@ -281,13 +281,14 @@ wristmotor.configure(wristconfig, ResetMode.kResetSafeParameters, PersistMode.kN
   public double goaldistance() {
     switch (goal) {
       case "CS":
-        return -1.03;
+        return -0.97;
         
       case "C1":
         return -1;
         
       case "C2":
-        return -0.92;
+      //Changed from -0.92 to hit more during auton 8/5/25
+        return -0.90;
         
       case "C3":
         return -1.01;
